@@ -4,11 +4,14 @@ begin
   name = File.read("bin/config")
   abort if !name
 
-  # puts "Creating final commit"
-  system("cd code-challenge && git add . && git commit --allow-empty -m \"Final commit\"")
+  # Create a final commit
+  system("git add . && git commit --allow-empty -m \"Final commit\"")
 
-  # puts "Opening code-challenge.bundle"
-  system("cd code-challenge && git bundle create ../#{name}.bundle HEAD #{name}")
+  # Push the changes to the remote repository
+  system("git push origin #{name}")
+
+  # Bundle changes into a Git bundle file
+  system("git bundle create ../#{name}.bundle HEAD #{name}")
 rescue SystemExit
   puts "File must be run as `ruby bin/end <your-name>`"
 end
