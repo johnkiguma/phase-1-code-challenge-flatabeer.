@@ -6,17 +6,20 @@ begin
 
   File.write("bin/config", name)
 
-  # puts "Opening code-challenge.bundle"
-  system("git clone code-challenge.bundle")
+  # Clone the Git repository
+  system("git clone https://github.com/johnkiguma/phase-1-code-challenge-flatabeer.git code-challenge")
 
-  # puts "Checking out branch \"#{name}\""
-  system("cd code-challenge && git checkout -b #{name}")
+  # Change to the code-challenge directory
+  system("cd code-challenge")
 
-  # puts "Creating initial commit"
-  system("cd code-challenge && git commit --allow-empty -m \"Initial commit\"")
+  # Create a new branch with the provided name
+  system("git checkout -b #{name}")
 
-  puts "Removing code-challenge.bundle"
-  system("rm code-challenge.bundle")
+  # Make an initial commit
+  system("git commit --allow-empty -m \"Initial commit\"")
+
+  puts "Removing code-challenge"
+  system("rm -rf ../code-challenge")
 rescue SystemExit
   puts "File must be run as `ruby bin/start <your-name>`"
 end
